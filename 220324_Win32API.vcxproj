@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="220324_Win32API.h" />
+    <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enum.h" />

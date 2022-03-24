@@ -87,6 +87,9 @@
     <ClInclude Include="Monster.h">
       <Filter>01. Obj\02. Monster</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractFactory.h">
+      <Filter>98. Design\00. AbstractFactory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="220324_Win32API.cpp">

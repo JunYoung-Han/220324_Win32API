@@ -80,6 +80,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 	}
 
+	if (nullptr != pMainGame)
+		Safe_Delete(pMainGame);
 
 
 	return (int)msg.wParam;

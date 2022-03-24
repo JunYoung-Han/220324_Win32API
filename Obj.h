@@ -16,6 +16,10 @@ public:
 	{
 		m_eDir = _eDir;
 	}
+	void Set_Dead(bool _bDead) { m_bDead = _bDead; }
+	bool Get_Dead(void) { return m_bDead; }
+	const RECT* Get_RECT(void) { return &m_tRect; }
+	const INFO* Get_INFO(void) { return &m_tInfo; }
 
 public:
 	virtual void Initialize(void) PURE;

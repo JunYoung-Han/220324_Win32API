@@ -14,6 +14,9 @@ public:
 	void Last_Update(void);
 	void Render(void);
 	void Release(void);
+
+public:
+	bool IntersectEllipse(LPRECT _rc, const RECT* _Rect1, const RECT* _Rect2);
 	
 private:
 	HDC m_DC;

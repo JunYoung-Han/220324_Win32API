@@ -22,6 +22,9 @@ void CMonster::Initialize(void)
 
 int CMonster::Update(void)
 {
+	if (m_bDead)
+		return OBJ_DEAD;
+
 	m_tInfo.fX += m_fSpeed;
 
 	Update_Rect();
@@ -36,7 +39,7 @@ void CMonster::Late_Update(void)
 
 void CMonster::Render(HDC _HDC)
 {
-	Rectangle(_HDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+	Ellipse(_HDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
 void CMonster::Release(void)

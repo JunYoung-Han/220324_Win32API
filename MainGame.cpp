@@ -18,6 +18,7 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize(void)
 {
+	srand(time(NULL));
 	m_DC = GetDC(g_hWnd);
 
 	// 플레이어
@@ -54,19 +55,45 @@ void CMainGame::Last_Update(void)
 		for (auto& iter : m_ObjList[i])
 			iter->Late_Update();
 	}
+
+	// 몬스터와 미사일 충돌 구현
+	for (auto& iter_m : m_ObjList[OBJ_MONSTER])
+	{
+		for (auto& iter_b : m_ObjList[OBJ_BULLET])
+		{
+			RECT rc{};
+			bool bCollision = IntersectRect(&rc, iter_m->Get_RECT(), iter_b->Get_RECT());
+			if (bCollision)
+			{
+				iter_m->Set_Dead(true);
+				iter_b->Set_Dead(true);
+			}
+		}
+	}
+	// 마우스와 몬스터 충돌 구현
+	for (auto& iter_m : m_ObjList[OBJ_MONSTER])
+	{
+		RECT rc{};
+		bool bCollision = IntersectEllipse(&rc, iter_m->Get_RECT(), m_ObjList[OBJ_MOUSE].front()->Get_RECT());
+		if (bCollision)
+		{
+			iter_m->Set_Dead(true);
+		}
+	}
+
 }
 
 void CMainGame::Render(void)
 {
 	++m_iFPS;
 
-	if (m_dwTime + 1000 < GetTickCount())
+	if (m_dwTime + 1000 < GetTickCount64())
 	{
 		swprintf_s(m_szFPS, L"FPS : %d", m_iFPS);
 		SetWindowText(g_hWnd, m_szFPS);
 
 		m_iFPS = 0;
-		m_dwTime = GetTickCount();
+		m_dwTime = GetTickCount64();
 	}
 
 	Rectangle(m_DC, 0, 0, WINCX, WINCY);
@@ -81,10 +108,11 @@ void CMainGame::Render(void)
 	TCHAR	szBuff[32] = L"";
 
 	// visual C++ 라이브러리에서 제공, 모든 서식 문자를 지원
-	swprintf_s(szBuff, L"Bullet : %d", m_ObjList[OBJ_BULLET].size()); // 소수점 출력 가능
+	// 소수점 출력 가능
+	swprintf_s(szBuff, L"Monster: %d   Bullet: %d", m_ObjList[OBJ_MONSTER].size(), m_ObjList[OBJ_BULLET].size());
 	// winAPI 라이브러리에서 제공, 소수점 출력이 불가능한 함수, 모든 서식 문자 제공을 안함
 	// wsprintf(szBuff, L"Bullet : %d", m_ObjList[OBJ_BULLET].size());
-	
+
 	// API 에서는 이게 더 직관적이라 이걸 사용
 	TextOut(m_DC, 51, 51, szBuff, lstrlen(szBuff));
 	// 1인자 : 출력할 dc
@@ -111,4 +139,33 @@ void CMainGame::Release(void)
 	}
 
 	ReleaseDC(g_hWnd, m_DC);
+}
+
+bool CMainGame::IntersectEllipse(LPRECT _rc, const RECT* _Rect1, const RECT* _Rect2)
+{
+	_Rect1->left;
+	// 원 1
+	// 센터
+	INFO tInfo_1;
+	tInfo_1.fCX = _Rect1->right - _Rect1->left;
+	tInfo_1.fCY = _Rect1->bottom - _Rect1->top;
+	tInfo_1.fX = _Rect1->left + tInfo_1.fCX / 2;
+	tInfo_1.fY = _Rect1->top + tInfo_1.fCY / 2;
+	INFO tInfo_2;
+	tInfo_2.fCX = _Rect2->right - _Rect2->left;
+	tInfo_2.fCY = _Rect2->bottom - _Rect2->top;
+	tInfo_2.fX = _Rect2->left + tInfo_2.fCX / 2;
+	tInfo_2.fY = _Rect2->top + tInfo_2.fCY / 2;
+
+	// 밑변
+	float fWidth = abs(tInfo_2.fX - tInfo_1.fX);
+	// 높이
+	float fHeight = abs(tInfo_2.fY - tInfo_1.fY);
+	// 대각
+	float fDiagonal = (float)sqrt((double)fWidth * (double)fWidth + (double)fHeight * (double)fHeight);
+
+	if (fDiagonal <= tInfo_1.fCX / 2 + tInfo_2.fCX / 2)
+		return true;
+	else
+		return false;
 }

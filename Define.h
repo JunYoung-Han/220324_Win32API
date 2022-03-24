@@ -2,6 +2,7 @@
 
 #define WINCX	800
 #define WINCY	600
+#define BORDER_OFFSET	50
 
 #define PURE	= 0
 

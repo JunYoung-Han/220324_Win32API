@@ -23,18 +23,24 @@ int CBullet::Update(void)
 	if (m_bDead)
 		return OBJ_DEAD;
 
-	if(LEFT == m_eDir)
+	switch (m_eDir)
+	{
+	case LEFT:
 		m_tInfo.fX -= m_fSpeed;
-	
-	if(RIGHT == m_eDir)
-		m_tInfo.fX += m_fSpeed;
-	
-	if(UP == m_eDir)
-		m_tInfo.fY -= m_fSpeed;
-	
-	if(DOWN == m_eDir)
-		m_tInfo.fY += m_fSpeed;
+		break;
 
+	case RIGHT:
+		m_tInfo.fX += m_fSpeed;
+		break;
+
+	case UP:
+		m_tInfo.fY -= m_fSpeed;
+		break;
+
+	case DOWN:
+		m_tInfo.fY += m_fSpeed;
+		break;
+	}
 
 	Update_Rect();
 	return OBJ_NOEVENT;

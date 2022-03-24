@@ -32,6 +32,10 @@ void CMainGame::Initialize(void)
 
 void CMainGame::Update(void)
 {
+
+	if (GetAsyncKeyState('M'))
+		m_ObjList[OBJ_MONSTER].push_back(CAbstractFactory<CMonster>::Create());
+
 	for (int i = 0; i < OBJ_END; ++i)
 	{
 		for (auto iter = m_ObjList[i].begin(); iter != m_ObjList[i].end();)
@@ -97,7 +101,7 @@ void CMainGame::Render(void)
 	}
 
 	Rectangle(m_DC, 0, 0, WINCX, WINCY);
-	Rectangle(m_DC, 50, 50, WINCX - 50, WINCY - 50);
+	Rectangle(m_DC, BORDER_OFFSET, BORDER_OFFSET, WINCX - BORDER_OFFSET, WINCY - BORDER_OFFSET);
 
 	for (int i = 0; i < OBJ_END; ++i)
 	{

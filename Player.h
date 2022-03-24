@@ -19,7 +19,6 @@ public:
 	
 private:
 	void Key_Input(void);
-	CObj* Create_Bullet(DIRECTION _eDir);
 
 private:
 	list<CObj*>* m_plistBullet;

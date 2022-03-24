@@ -157,6 +157,7 @@
     <ClInclude Include="Include.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="Mouse.h" />
     <ClInclude Include="Obj.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Obj.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

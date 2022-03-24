@@ -90,6 +90,9 @@
     <ClInclude Include="AbstractFactory.h">
       <Filter>98. Design\00. AbstractFactory</Filter>
     </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>01. Obj\03. Mouse</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="220324_Win32API.cpp">
@@ -112,6 +115,9 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>01. Obj\02. Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>01. Obj\03. Mouse</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "AbstractFactory.h"
 
 CPlayer::CPlayer()
 	: m_plistBullet(nullptr)
@@ -59,34 +60,22 @@ void CPlayer::Key_Input(void)
 		m_tInfo.fY += m_fSpeed;
 
 	if (GetAsyncKeyState('A'))
-		m_plistBullet->push_back(Create_Bullet(LEFT));
+		m_plistBullet->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, LEFT));
 
 	if (GetAsyncKeyState('D'))
-		m_plistBullet->push_back(Create_Bullet(RIGHT));
+		m_plistBullet->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, RIGHT));
 
 	if (GetAsyncKeyState('W'))
-		m_plistBullet->push_back(Create_Bullet(UP));
+		m_plistBullet->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, UP));
 
 	if (GetAsyncKeyState('S'))
-		m_plistBullet->push_back(Create_Bullet(DOWN));
+		m_plistBullet->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, DOWN));
 
 	if (GetAsyncKeyState(VK_SPACE))
 	{
-		m_plistBullet->push_back(Create_Bullet(LEFT));
-		m_plistBullet->push_back(Create_Bullet(RIGHT));
-		m_plistBullet->push_back(Create_Bullet(UP));
-		m_plistBullet->push_back(Create_Bullet(DOWN));
+		m_plistBullet->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, LEFT));
+		m_plistBullet->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, RIGHT));
+		m_plistBullet->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, UP));
+		m_plistBullet->push_back(CAbstractFactory<CBullet>::Create(m_tInfo.fX, m_tInfo.fY, DOWN));
 	}
-
-
-}
-
-CObj* CPlayer::Create_Bullet(DIRECTION _eDir)
-{
-	CObj* pBullet = new CBullet;
-	pBullet->Initialize();
-	pBullet->Set_Pos(m_tInfo.fX, m_tInfo.fY);
-	pBullet->Set_Dir(_eDir);
-
-	return pBullet;
 }

@@ -2,6 +2,7 @@
 #include "MainGame.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Mouse.h"
 #include "AbstractFactory.h"
 
 CMainGame::CMainGame()
@@ -24,7 +25,8 @@ void CMainGame::Initialize(void)
 	dynamic_cast<CPlayer*>(m_ObjList[OBJ_PLAYER].front())->Set_Bullet(&m_ObjList[OBJ_BULLET]);
 	// 몬스터
 	m_ObjList[OBJ_MONSTER].push_back(CAbstractFactory<CMonster>::Create());
-	
+	// 마우스
+	m_ObjList[OBJ_MOUSE].push_back(CAbstractFactory<CMouse>::Create());
 }
 
 void CMainGame::Update(void)

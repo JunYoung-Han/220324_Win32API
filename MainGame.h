@@ -17,11 +17,6 @@ public:
 	
 private:
 	HDC m_DC;
-	//CObj* m_pPlayer;
-	//CObj* m_pMonster;
-	//// 총알들은 메인에서 저장됨.
-	//list<CObj*> m_listBullet;
-
 	list<CObj*> m_ObjList[OBJ_END];
 
 	DWORD m_dwTime;
